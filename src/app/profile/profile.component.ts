@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RegistrationService} from '../service/registration.service';
 import { User } from '../user';
 import { ActivatedRoute } from '@angular/router';
-import { SharedService } from '../service/shared.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -14,14 +14,13 @@ export class ProfileComponent implements OnInit {
 
 
   user= new User()
-  userid: number
+  username: String
   
   constructor(
     private http: HttpClient,
     private service: RegistrationService,
     private route:ActivatedRoute,
-    private sharedservice:SharedService
-  ) { }
+      ) { }
 
   ngOnInit(){
     this.getuser();
@@ -30,20 +29,14 @@ export class ProfileComponent implements OnInit {
 
   getuser()
   {
-      this.userid = JSON.parse(localStorage.getItem('user'))
-      console.log("hello" + this.user)
+      this.username = sessionStorage.getItem('username')
+      console.log("hello" + this.username)
   }
 
   profileUser()
   {
-
-    // this.sharedservice.getid();
-    // console.log("Data is" + this.sharedservice.getid()); 
-     //console.log("DATA" + localStorage.getItem(this.user.id))
-    // var ser= this.sharedservice.getid();
-   
-   
-    this.service.profileFromRemote(this.userid).subscribe(
+    console.log("profile user" + this.username)
+    this.service.profileFromRemote(this.username).subscribe(
         response => {
           console.log(response);
           this.user = response;
@@ -53,7 +46,7 @@ export class ProfileComponent implements OnInit {
          
       },
       error => {
-        console.log("Exception occured");
+        console.log(error);
 
       }
     )

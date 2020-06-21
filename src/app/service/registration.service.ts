@@ -14,10 +14,10 @@ export class RegistrationService {
      { }
 
 
-  public generateToken(request)
-  {
-    return this.http.post("http://localhost:8080/authenticate",request,{responseType: 'text' as 'json'});
-  } 
+  // public generateToken(request)
+  // {
+  //   return this.http.post("http://localhost:8080/authenticate",request,{responseType: 'text' as 'json'});
+  // } 
 
   public loginUserFromRemote(user: User):Observable<any>
   {
@@ -29,14 +29,14 @@ export class RegistrationService {
     return this.http.post<any>(`${API_URL}/registeruser`,user)
   }
 
-  public profileFromRemote(id: number):Observable<any>
+  public profileFromRemote(username: String):Observable<any>
   {
-    return this.http.get<User>(`${API_URL}/profile/${id}`)
+    return this.http.get<User>(`${API_URL}/profile/${username}`)
   }
 
-  public updateUserRemote(user: User,id: number)
+  public updateUserRemote(user: User,username: String)
   {
-    return this.http.put<User>(`${API_URL}/editprofile/${id}`,user)
+    return this.http.put<User>(`${API_URL}/editprofile/${username}`,user)
   }
 
 }

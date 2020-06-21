@@ -4,6 +4,7 @@ import { RegistrationService} from '../service/registration.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../user';
 import { SharedService } from '../service/shared.service';
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,12 @@ export class LoginComponent implements OnInit {
 
    user = new User()
    msg = '';
+   
   
   constructor(private service: RegistrationService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private sharedservice:SharedService
+    private loginservice: AuthenticationService
     ) { }
 
   ngOnInit() {
@@ -28,26 +30,17 @@ export class LoginComponent implements OnInit {
 
   loginUser()
   {
-    this.service.loginUserFromRemote(this.user).subscribe(
-      data => {  
-        this.user=data
-        console.log(this.user=data)
-        console.log("Response received" + this.user.username);
-        var ser = this.sharedservice.setid(this.user.id)
-        localStorage.setItem('user',JSON.stringify(this.user.id));
-        this.router.navigate(['profile']) 
-       
-    },
-      error => {  
-        console.log("Exception occured");
-        this.msg="Bad Credentials.....";
+    console.log(this.user);
+    this.loginservice.authenticate(this.user).subscribe(
+      data => {
+                this.router.navigate(['profile']) 
+        
+      },
+      error => {
+       console.log("Bad credentials")
+       this.msg = "Bad credentials"
       }
-    )
+    );
   }
 
-  // registration()
-  // {
-  //   console.log("hii")
-  //   this.router.navigate(['/registration'])
-  // }
 }

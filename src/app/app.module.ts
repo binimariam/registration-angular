@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegistrationService } from './service/registration.service';
 import { EditprofileComponent } from './editprofile/editprofile.component';
-import { SecurityComponent } from './security/security.component';
+import { BasicAuthInterceptorService } from './service/basic-auth-interceptor.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,7 @@ import { SecurityComponent } from './security/security.component';
     RegistrationComponent,
     ProfileComponent,
     LogoutComponent,
-    EditprofileComponent,
-    SecurityComponent
+    EditprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,7 @@ import { SecurityComponent } from './security/security.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [RegistrationService],
+  providers: [{provide: HTTP_INTERCEPTORS,useClass:BasicAuthInterceptorService,multi:true},AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

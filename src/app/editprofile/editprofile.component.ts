@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../service/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { RegistrationService } from '../service/registration.service';
 import { User } from '../user';
@@ -12,27 +11,12 @@ import { Router } from '@angular/router';
 })
 export class EditprofileComponent implements OnInit {
 
-  // selectedFile = null;
-  // onFileSelected($event)
-  // {
-  //   this.selectedFile = event.target.files[0];
-  // }
-  // onUpload()
-  // {
-  //   this.http.post
-  // }
   msg=''
-  userid: number
+  username: String
   user= new User()
 
-  authRequest:any={
-    "username": "",
-    "password": ""
-  };
-
-
   constructor(private http: HttpClient,
-    private service: RegistrationService,private sharedservice:SharedService,
+    private service: RegistrationService,
     private router: Router
   ) { }
 
@@ -45,8 +29,8 @@ export class EditprofileComponent implements OnInit {
 
   getuser()
   {
-    this.userid = JSON.parse(localStorage.getItem('user'))
-    this.service.profileFromRemote(this.userid).subscribe(
+    this.username = sessionStorage.getItem('username')
+    this.service.profileFromRemote(this.username).subscribe(
       response => {
         console.log(response);
         this.user = response;
@@ -65,15 +49,13 @@ export class EditprofileComponent implements OnInit {
 
   updateUser()
   {
-  this.sharedservice.getid();
-  console.log("Data is" + this.sharedservice.getid()); 
-    
-  this.service.updateUserRemote(this.user,this.sharedservice.getid()).subscribe(
+    this.service.updateUserRemote(this.user,this.username).subscribe(
       response => {
         this.user = response;
         console.log(this.user=response)
-        console.log("Response all" + this.user.username);
-        console.log("Data is" + this.user.emailid);
+        console.log("update username" + this.user.username);
+        console.log("email is" + this.user.emailid);
+        sessionStorage.setItem('username',this.user.username);
         this.msg= "Updated successfully" 
         this.router.navigate(['/profile']);
     },

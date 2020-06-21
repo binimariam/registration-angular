@@ -5,15 +5,16 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LogoutComponent } from './logout/logout.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
-import { RouteGuardService } from './service/route-guard.service';
+import { AuthGuardService } from './service/auth-guard.service';
+
 
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
   {path:'login', component: LoginComponent},
-  {path:'profile', component:ProfileComponent,canActivate:[RouteGuardService]},
+  {path:'profile', component:ProfileComponent,canActivate:[AuthGuardService]},
   {path:'registration', component:RegistrationComponent},
-  {path: 'editprofile', component: EditprofileComponent,canActivate:[RouteGuardService]},
+  {path: 'editprofile', component: EditprofileComponent,canActivate:[AuthGuardService]},
   {path:'logout', component:LogoutComponent}
 ];
 
