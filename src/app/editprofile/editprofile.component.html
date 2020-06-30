@@ -1,16 +1,17 @@
 <div style="min-width: 100%;min-height: 100%;background-image: url('../assets/Images/background.jpg');">
     <br>
 
-    <!-- <div>
-        <input type="file" (change)="onFileSelected($event)">
-        <button type="button" (click)="onUpload()">Upload</button>
-  </div> -->
-
-      
+        
 <div class="container">
 <h3>Profile Update</h3>
     <form #Editform="ngForm" (ngSubmit)="updateUser()">
 
+      <div class="form-group">
+        <label for="photo">Upload Photo:</label>
+        <td><img src="http://localhost:8080/image/{{user.username}}" width="200" height="100" ></td>
+        <input type="file" class="form-control" (change)="onSelectFile($event)" style="height:100%" required >
+      </div>
+      
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control"  name="user.emailid"  [(ngModel)]="user.emailid" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"

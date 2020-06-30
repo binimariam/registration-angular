@@ -1,0 +1,21 @@
+<h3>Book Details</h3>
+
+    <table>
+        <tr>
+            <td>Book Id</td>
+            <td>{{book.id}}</td>
+        </tr>
+        <tr>
+            <td>Book Name</td>
+            <td>{{book.name}}</td>
+        </tr>
+        <tr>
+            <td>Book Author</td>
+            <td>{{book.author}}</td>
+        </tr>
+       
+    </table>
+    <br>
+
+    <a class="btn btn-small btn-warning" (click)="editBook()">Edit</a>
+    <a class="btn btn-small btn-danger" (click)="deleteBook()">Delete</a>

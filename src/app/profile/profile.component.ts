@@ -32,9 +32,14 @@ export class ProfileComponent implements OnInit {
       this.username = sessionStorage.getItem('username')
       console.log("hello" + this.username)
   }
-
+  
   profileUser()
   {
+    // this.service.fileretrieve(FormData, this.username).subscribe(
+    //   data => {
+    //     this.user= data
+    //   }
+    // )
     console.log("profile user" + this.username)
     this.service.profileFromRemote(this.username).subscribe(
         response => {

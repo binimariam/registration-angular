@@ -3,7 +3,6 @@ import {NgForm} from '@angular/forms';
 import { RegistrationService} from '../service/registration.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../user';
-import { SharedService } from '../service/shared.service';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Component({

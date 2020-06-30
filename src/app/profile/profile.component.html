@@ -1,6 +1,8 @@
+<div style="min-width: 100%;min-height: 100%;background-image: url('../assets/Images/background.jpg');">
+  <br>
 <h3> Profile</h3>
 
-   <div class="container">
+   <!-- <div class="container">
     <table class="table">
      
       <thead>
@@ -11,20 +13,46 @@
           <th>Password</th>
         </tr>
       </thead>
-      <tbody>
-       
+      <tbody>     
           
           <td>{{user.username}} </td>
           <td>{{user.emailid}}</td>
-          <td>{{user.password}}</td>
-          
+          <td>{{user.password}}</td>   
       </tbody>
-    </table>
+    </table> -->
+
+    <div class="container">
+      <table class="table">
+      
+        <tr>
+          <td>Photo</td>
+          <td><img src="http://localhost:8080/image/{{user.username}}" width="200" height="100" ></td>
+         
+        </tr>
+        
+          <tr>
+            <td>Username</td>
+            <td>{{user.username}} </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{user.emailid}}</td>
+          </tr>
+            
+          <tr>
+            <td>Password</td>
+            <td>{{user.password}}</td>
+          </tr>
+
+      </table>
+
+    
    
     </div>
 
     <button class="float-left" [routerLink]="['/editprofile']">EDIT PROFILE</button>
     <button class="float-right" [routerLink]="['/logout']">LOGOUT</button>
+    <button class="float-center" [routerLink]="['/books']">BOOKS</button>
     
-     
+  </div>   
      

@@ -1,0 +1,14 @@
+<h3>{{book.id == null ? 'Add' : 'Edit'}} Book - {{book.id}}</h3>
+
+
+
+<form>
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" placeholder="Book Name" [(ngModel)]="book.name" name="name">
+
+  <label for="author">Author</label>
+  <input type="text" class="form-control" id="author" placeholder="author" name="author" [(ngModel)]="book.author">
+
+
+  <button type="button" class="btn btn-success" (click)="saveBook()">Save Book</button>
+</form>

@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { API_URL } from 'src/environments/environment';
 
-export class User{
-  constructor(
-    public status:string,
-     ) {}
+// export class User{
+//   constructor(
+//     public status:string,
+//      ) {}
   
-}
+// }
 
-export class JwtResponse{
-  constructor(
-    public jwttoken:string,
-     ) {}
+// export class JwtResponse{
+//   constructor(
+//     public jwttoken:string,
+//      ) {}
   
-}
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthenticationService {
      }
 
      authenticate(request) {
-      return this.httpClient.post<any>('http://localhost:8080/authenticate',request,{responseType: 'text' as 'json'}).pipe(
+      return this.httpClient.post<any>(`${API_URL}/authenticate`,request,{responseType: 'text' as 'json'}).pipe(
        map(
          userData => {
           sessionStorage.setItem('username',request.username);

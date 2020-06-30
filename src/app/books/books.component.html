@@ -1,0 +1,29 @@
+<a class="btn btn-primary mb-3" (click)="addBook()">Add New Book</a>
+
+<div class="container row">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Book Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{book.name}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="viewBook(book.id)">Show Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="col-md-6">
+        <app-viewbook *ngIf="action === 'view'" [book]="selectedBook" (bookDeletedEvent)="refreshData()"></app-viewbook>
+        <app-addbook *ngIf="action === 'edit' || action === 'add'" [book]="selectedBook" (bookAddedEvent)="refreshData()"></app-addbook>
+      </div>
+  </div>
+  <button class="float-left" [routerLink]="['/profile']">BACK TO PROFILE</button>
+  <button class="float-right" [routerLink]="['/logout']">LOGOUT</button>
